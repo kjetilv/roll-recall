@@ -19,18 +19,30 @@
     UIView *rootView = [[UIView alloc] init];
 
     self.rollImageView = [[UIImageView alloc] init];
-    self.rollImageView.image = [[UIImage alloc] initWithContentsOfFile:@"1368149063_Roll.png"];
+    self.rollImageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
+    self.rollTypeView = [[UITextView alloc] init];
+    self.rollTypeView.text = @"Tri-X 400";
 
     [rootView addSubview:self.rollImageView];
     [rootView addSubview:self.rollTypeView];
 
     [self setupLayout:rootView];
+
+    self.view = rootView;
 }
 
 - (void)setupLayout:(UIView *)rootView {
+    UIView *image = self.rollImageView;
+    UIView *type = self.rollTypeView;
 
-//    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[tableView]-|" views:views]];
-//    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[tableView]-|" views:views]];
+    NSDictionary *views = NSDictionaryOfVariableBindings(image, type);
+    for (UIView *view in views.allValues) {
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image]-[type]-|" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[image]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[type]" views:views]];
 
 }
 @end
