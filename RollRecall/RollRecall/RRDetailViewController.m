@@ -18,8 +18,9 @@
 - (void)loadView {
     UIView *rootView = [[UIView alloc] init];
 
-    self.rollImageView = [[UIImageView alloc] init];
-    self.rollImageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
+    UIImageView *imageView = [[UIImageView alloc] init];
+    imageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
+    self.rollImageView = imageView;
     self.rollTypeView = [[UITextView alloc] init];
     self.rollTypeView.text = @"Tri-X 400";
 
