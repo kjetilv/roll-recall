@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3305C23AE27827970FAE70C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305CEE7D9B86389068ABD87 /* CoreGraphics.framework */; };
+		3305C349BA9DC0C3FD704743 /* NSLayoutConstraint+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305CA4CE5E6763E3879DC0F /* NSLayoutConstraint+Util.m */; };
 		3305C3C7B9A3DD5E8AFCF028 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305C1126CBE311136BA8645 /* UIKit.framework */; };
 		3305C5646FDFE88EAF3F475A /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3305CF214F5AAD7D9296B240 /* Default-568h@2x.png */; };
 		3305C69BAAB6527A7E0C9624 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3305C4BC57212A62D2483B33 /* InfoPlist.strings */; };
@@ -24,10 +25,12 @@
 		3305C15C09176C7FFDFBC176 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3305C199B1E53C6AC992BC4F /* RollRecall-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RollRecall-Prefix.pch"; sourceTree = "<group>"; };
 		3305C4217C0337638213DB1A /* RRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRMainViewController.m; sourceTree = "<group>"; };
+		3305C4476FBD28865ECEC92C /* NSLayoutConstraint+Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSLayoutConstraint+Util.h"; sourceTree = "<group>"; };
 		3305C6E82F06ACF77DEFCCCC /* RRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RRAppDelegate.h; sourceTree = "<group>"; };
 		3305C76AA9A768019E0E003C /* RRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRMainViewController.h; sourceTree = "<group>"; };
 		3305C994E3938596F81B16D0 /* RollRecall-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "RollRecall-Info.plist"; sourceTree = "<group>"; };
 		3305CA45F834849126AFCA84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3305CA4CE5E6763E3879DC0F /* NSLayoutConstraint+Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSLayoutConstraint+Util.m"; sourceTree = "<group>"; };
 		3305CACB88A93F51E2088B63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3305CD308EA4424A09DAB934 /* RollRecall.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RollRecall.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3305CDDD1964114050020456 /* RRAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RRAppDelegate.m; sourceTree = "<group>"; };
@@ -59,6 +62,8 @@
 				3305CDDD1964114050020456 /* RRAppDelegate.m */,
 				3305C4217C0337638213DB1A /* RRMainViewController.m */,
 				3305C76AA9A768019E0E003C /* RRMainViewController.h */,
+				3305CA4CE5E6763E3879DC0F /* NSLayoutConstraint+Util.m */,
+				3305C4476FBD28865ECEC92C /* NSLayoutConstraint+Util.h */,
 			);
 			path = RollRecall;
 			sourceTree = "<group>";
@@ -168,6 +173,7 @@
 				3305CA7311EE8CE13AA69F57 /* main.m in Sources */,
 				3305CD16831FA30278C8CD8B /* RRAppDelegate.m in Sources */,
 				3305CDD75B46A0E0B15EC148 /* RRMainViewController.m in Sources */,
+				3305C349BA9DC0C3FD704743 /* NSLayoutConstraint+Util.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
