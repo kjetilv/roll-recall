@@ -7,12 +7,16 @@
 //
 
 #import "RRAppDelegate.h"
+#import "RRMainViewController.h"
 
 @implementation RRAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
-    // Override point for customization after application launch.
+
+    RRMainViewController *mainViewController = [[RRMainViewController alloc] init];
+    self.window.rootViewController = mainViewController;
+
     self.window.backgroundColor = [UIColor whiteColor];
     [self.window makeKeyAndVisible];
     return YES;

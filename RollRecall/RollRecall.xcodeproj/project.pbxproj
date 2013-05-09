@@ -15,6 +15,7 @@
 		3305CA7311EE8CE13AA69F57 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305CACB88A93F51E2088B63 /* main.m */; };
 		3305CB453F70A59D0B54E20B /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3305CE3747782E6504BFBD67 /* Default.png */; };
 		3305CD16831FA30278C8CD8B /* RRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305CDDD1964114050020456 /* RRAppDelegate.m */; };
+		3305CDD75B46A0E0B15EC148 /* RRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305C4217C0337638213DB1A /* RRMainViewController.m */; };
 		3305CFB06FBD25BB381C8992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305CFD55C230487B94338C5 /* Foundation.framework */; };
 /* End PBXBuildFile section */
 
@@ -22,7 +23,9 @@
 		3305C1126CBE311136BA8645 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3305C15C09176C7FFDFBC176 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3305C199B1E53C6AC992BC4F /* RollRecall-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RollRecall-Prefix.pch"; sourceTree = "<group>"; };
+		3305C4217C0337638213DB1A /* RRMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRMainViewController.m; sourceTree = "<group>"; };
 		3305C6E82F06ACF77DEFCCCC /* RRAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RRAppDelegate.h; sourceTree = "<group>"; };
+		3305C76AA9A768019E0E003C /* RRMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRMainViewController.h; sourceTree = "<group>"; };
 		3305C994E3938596F81B16D0 /* RollRecall-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.info; path = "RollRecall-Info.plist"; sourceTree = "<group>"; };
 		3305CA45F834849126AFCA84 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3305CACB88A93F51E2088B63 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -54,6 +57,8 @@
 				3305CCFAF4B18DB7A44D3665 /* Supporting Files */,
 				3305C6E82F06ACF77DEFCCCC /* RRAppDelegate.h */,
 				3305CDDD1964114050020456 /* RRAppDelegate.m */,
+				3305C4217C0337638213DB1A /* RRMainViewController.m */,
+				3305C76AA9A768019E0E003C /* RRMainViewController.h */,
 			);
 			path = RollRecall;
 			sourceTree = "<group>";
@@ -162,6 +167,7 @@
 			files = (
 				3305CA7311EE8CE13AA69F57 /* main.m in Sources */,
 				3305CD16831FA30278C8CD8B /* RRAppDelegate.m in Sources */,
+				3305CDD75B46A0E0B15EC148 /* RRMainViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
