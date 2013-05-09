@@ -31,8 +31,12 @@
     imageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
     self.rollImageView = imageView;
 
-    self.rollTypeView = [[UITextView alloc] init];
-    self.rollTypeView.text = @"Tri-X 400";
+    UITextView *textView = [[UITextView alloc] init];
+    textView.text = @"Tri-X 400";
+    textView.font = [UIFont systemFontOfSize:14];
+    textView.textColor = [UIColor blackColor];
+    textView.backgroundColor = [UIColor whiteColor];
+    self.rollTypeView = textView;
 
     [rootView addSubview:self.rollImageView];
     [rootView addSubview:self.rollTypeView];
@@ -54,9 +58,9 @@
 
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[navigation]-|" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[navigation]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[type]-|" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[type(==100)]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[image(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[type]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[type(==100)]" views:views]];
 }
 
 - (void)saveAndExit {
