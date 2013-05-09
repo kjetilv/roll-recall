@@ -18,6 +18,7 @@
 		3305CD16831FA30278C8CD8B /* RRAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305CDDD1964114050020456 /* RRAppDelegate.m */; };
 		3305CDD75B46A0E0B15EC148 /* RRMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305C4217C0337638213DB1A /* RRMainViewController.m */; };
 		3305CFB06FBD25BB381C8992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305CFD55C230487B94338C5 /* Foundation.framework */; };
+		BC9BE398175430316BBAAB16 /* RRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BE29360438374076F6DB1 /* RRDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,8 @@
 		3305CEE7D9B86389068ABD87 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3305CF214F5AAD7D9296B240 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3305CFD55C230487B94338C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		BC9BE29360438374076F6DB1 /* RRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRDetailViewController.m; sourceTree = "<group>"; };
+		BC9BEBB13C041B785A2376D9 /* RRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRDetailViewController.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +67,8 @@
 				3305C76AA9A768019E0E003C /* RRMainViewController.h */,
 				3305CA4CE5E6763E3879DC0F /* NSLayoutConstraint+Util.m */,
 				3305C4476FBD28865ECEC92C /* NSLayoutConstraint+Util.h */,
+				BC9BE29360438374076F6DB1 /* RRDetailViewController.m */,
+				BC9BEBB13C041B785A2376D9 /* RRDetailViewController.h */,
 			);
 			path = RollRecall;
 			sourceTree = "<group>";
@@ -174,6 +179,7 @@
 				3305CD16831FA30278C8CD8B /* RRAppDelegate.m in Sources */,
 				3305CDD75B46A0E0B15EC148 /* RRMainViewController.m in Sources */,
 				3305C349BA9DC0C3FD704743 /* NSLayoutConstraint+Util.m in Sources */,
+				BC9BE398175430316BBAAB16 /* RRDetailViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
