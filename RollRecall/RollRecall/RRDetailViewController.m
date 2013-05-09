@@ -40,8 +40,8 @@
         view.translatesAutoresizingMaskIntoConstraints = NO;
     }
 
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image]-[type]-|" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[image]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[type]-|" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[image(==100)]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[type]" views:views]];
 
 }
