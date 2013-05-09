@@ -53,7 +53,7 @@
 }
 
 - (void)detailViewControllerDidFinish:(RRDetailViewController *)controller {
-
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

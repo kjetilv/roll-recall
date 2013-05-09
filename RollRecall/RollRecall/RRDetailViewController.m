@@ -11,6 +11,7 @@
 // private properties
 @property (strong, nonatomic) UIImageView *rollImageView;
 @property (strong, nonatomic) UITextView *rollTypeView;
+@property (strong, nonatomic) UINavigationBar *navigationBar;
 @end
 
 @implementation RRDetailViewController
@@ -18,9 +19,18 @@
 - (void)loadView {
     UIView *rootView = [[UIView alloc] init];
 
+    self.navigationBar = [[UINavigationBar alloc] init];
+    UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"Roll"];
+    UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain
+                                                                     target:self action:@selector(saveAndExit)];
+    navigationItem.rightBarButtonItem = addButtonItem;
+    [self.navigationBar pushNavigationItem:navigationItem animated:NO];
+    [rootView addSubview:self.navigationBar];
+
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
     self.rollImageView = imageView;
+
     self.rollTypeView = [[UITextView alloc] init];
     self.rollTypeView.text = @"Tri-X 400";
 
@@ -33,17 +43,24 @@
 }
 
 - (void)setupLayout:(UIView *)rootView {
+    UIView *navigation = self.navigationBar;
     UIView *image = self.rollImageView;
     UIView *type = self.rollTypeView;
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(image, type);
+    NSDictionary *views = NSDictionaryOfVariableBindings(navigation, image, type);
     for (UIView *view in views.allValues) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
     }
 
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[navigation]-|" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[navigation]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[type]-|" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[image(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[type]" views:views]];
-
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[image(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[type]" views:views]];
 }
+
+- (void)saveAndExit {
+    [self.delegate detailViewControllerDidFinish:self];
+}
+
 @end
