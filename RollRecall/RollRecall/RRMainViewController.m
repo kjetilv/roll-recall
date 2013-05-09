@@ -1,7 +1,8 @@
 #import "RRMainViewController.h"
 #import "NSLayoutConstraint+Util.h"
+#import "RRDetailViewController.h"
 
-@interface RRMainViewController()
+@interface RRMainViewController() <RRDetailViewControllerDelegate>
 // private properties
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
@@ -45,6 +46,13 @@
 }
 
 - (void)addRoll {
+    RRDetailViewController *controller = [[RRDetailViewController alloc] init];
+    controller.delegate = self;
+    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    [self presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)detailViewControllerDidFinish:(RRDetailViewController *)controller {
 
 }
 
