@@ -23,8 +23,8 @@ typedef enum RRRollSize : NSUInteger {
     enum RRRollSize format;
     NSInteger iso;
     NSString *name;
-    NSInteger exposures;
 }
 
+- (RRRollType *)initWith:(NSString *)manufacturer name:(NSString *)name iso:(NSInteger)iso format:(RRRollSize)format1;
 -(RRRoll *)newRoll:(NSInteger)iso;
 @end

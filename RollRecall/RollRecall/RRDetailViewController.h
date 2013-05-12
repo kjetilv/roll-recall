@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 
 @class RRDetailViewController;
-@class RRRollManufacturer;
 
 @protocol RRDetailViewControllerDelegate
 - (void)detailViewControllerDidFinish:(RRDetailViewController *)controller;

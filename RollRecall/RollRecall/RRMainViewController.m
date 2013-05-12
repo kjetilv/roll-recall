@@ -1,11 +1,14 @@
 #import "RRMainViewController.h"
 #import "NSLayoutConstraint+Util.h"
 #import "RRDetailViewController.h"
+#import "RRRollType.h"
 
 @interface RRMainViewController() <RRDetailViewControllerDelegate>
 // private properties
 @property (strong, nonatomic) UITableView *tableView;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
+
+@property (strong, nonatomic) NSArray *rollTypes;
 @end
 
 @implementation RRMainViewController
@@ -28,6 +31,12 @@
     [self setupLayout:rootView];
 
     self.view = rootView;
+
+    self.rollTypes = @[
+            [[RRRollType alloc] initWith:@"Kodak" name:@"Tri-X" iso:400 format:_135],
+            [[RRRollType alloc] initWith:@"Foma" name:@"Fomapan Profi Action Line" iso:400 format:_135],
+            [[RRRollType alloc] initWith:@"Ilford" name:@"HP5-Plus" iso:400 format:_135]
+    ];
 }
 
 - (void)setupLayout:(UIView *)rootView {
