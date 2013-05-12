@@ -8,22 +8,19 @@
 #import "RRRoll.h"
 
 @interface RRRollType()
-@property (strong, nonatomic) NSString *manufacturer;
-@property (nonatomic) enum RRRollSize format;
 @property (nonatomic) NSUInteger iso;
 @property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSArray *formats;
 @end
 
 @implementation RRRollType
 
--(RRRollType *)initWith:(NSString *)manufacturer
-                   name:(NSString *)name
+-(RRRollType *)initWith:(NSString *)name
                     iso:(NSUInteger)iso
-                 format:(RRRollSize)format {
+                 formats:(NSArray *)formats {
     self = [super init];
     if (self) {
-        _manufacturer = manufacturer;
-        _format = format;
+        _formats = formats;
         _iso = iso;
         _name = name;
     }

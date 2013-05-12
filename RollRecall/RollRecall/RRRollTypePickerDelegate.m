@@ -7,32 +7,33 @@
 
 #import "RRRollTypePickerDelegate.h"
 #import "RRRollType.h"
+#import "RRRollManufacturer.h"
 
 @interface RRRollTypePickerDelegate () <UIPickerViewDelegate>
-@property (strong, nonatomic) NSArray *rollTypes;
+@property (strong, nonatomic) NSArray *manufacturers;
 @end
 
 @implementation RRRollTypePickerDelegate
 
--(RRRollTypePickerDelegate *)initWith:(NSArray *)rollTypes {
+-(RRRollTypePickerDelegate *)initWith:(NSArray *)manufacturers {
     self = [super init];
     if (self) {
-        _rollTypes = rollTypes;
+        _manufacturers = manufacturers;
     }
     return self;
 }
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    RRRollType *film = [self.rollTypes objectAtIndex: row];
+    RRRollManufacturer *manu = [self.manufacturers objectAtIndex:row];
     switch (component) {
         case 0: {
-            return film.manufacturer;
+            return manu.name;
         }
         case 1: {
-            return film.name;
+            return manu.rollTypes;
         }
         case 2: {
-            return [NSString stringWithFormat:@"%d", film.iso];
+            return [NSString stringWithFormat:@"%d", manu.iso];
         }
         default:
             return nil;

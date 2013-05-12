@@ -21,11 +21,10 @@ typedef enum RRRollSize : NSUInteger {
 } RRRollSize;
 
 @interface RRRollType : NSObject
-@property (readonly, strong, nonatomic) NSString *manufacturer;
-@property (readonly, nonatomic) enum RRRollSize format;
 @property (readonly, nonatomic) NSUInteger iso;
+@property (readonly, nonatomic) NSArray* formats;
 @property (readonly, strong, nonatomic) NSString *name;
 
-- (RRRollType *)initWith:(NSString *)manufacturer name:(NSString *)name iso:(NSUInteger)iso format:(RRRollSize)format;
+- (RRRollType *)initWith:(NSString *)name iso:(NSUInteger)iso formats:(NSArray *)formats;
 -(RRRoll *)newRoll:(NSUInteger)iso;
 @end

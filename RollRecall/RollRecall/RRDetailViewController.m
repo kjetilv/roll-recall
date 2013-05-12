@@ -9,6 +9,7 @@
 #import "RRRollType.h"
 #import "RRRollTypePickerDelegate.h"
 #import "RRRollTypePickerDataSource.h"
+#import "RRRollManufacturer.h"
 
 @interface RRDetailViewController()
 // private properties
@@ -41,18 +42,43 @@
     selectedView.text = @"No type selected";
     _rollTypeSelected = selectedView;
 
-    NSArray *rollTypes = @[
-            [[RRRollType alloc] initWith:@"Kodak" name:@"Tri-X" iso:400 format:_135],
-            [[RRRollType alloc] initWith:@"Foma" name:@"Fomapan Profi Action Line" iso:400 format:_135],
-            [[RRRollType alloc] initWith:@"Ilford" name:@"HP5-Plus" iso:400 format:_135]
+    NSArray *manufacturers = @[
+            [[RRRollManufacturer alloc] initWith: @"Kodak" rollTypes: @[
+                    [[RRRollType alloc] initWith: @"Tri-X" iso:320 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"T-Max" iso:400 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"T-Max" iso:100 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"T-Max" iso:400 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"T-Max" iso:3200 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+            ],
+            [[RRRollManufacturer alloc] initWith: @"Foma" rollTypes: @[
+                    [[RRRollType alloc] initWith: @"Fomapan" iso:100 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"Fomapan" iso:200 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"Fomapan" iso:400 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+            ],
+            [[RRRollManufacturer alloc] initWith: @"Ilford" rollTypes: @[
+                    [[RRRollType alloc] initWith: @"HP5 Plus" iso:400 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"FP4 Plus" iso:125 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                    [[RRRollType alloc] initWith: @"PanF Plus" iso:50 formats:
+                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+            ]
     ];
 
     UIPickerView *rollSelector = [[UIPickerView alloc] init];
 
-    _rollTypePickerDelegate = [[RRRollTypePickerDelegate alloc] initWith: rollTypes];
+    _rollTypePickerDelegate = [[RRRollTypePickerDelegate alloc] initWith:manufacturers];
     rollSelector.delegate = _rollTypePickerDelegate;
 
-    _rollTypePickerDataSource = [[RRRollTypePickerDataSource alloc] initWith: rollTypes];
+    _rollTypePickerDataSource = [[RRRollTypePickerDataSource alloc] initWith:manufacturers];
     rollSelector.dataSource = _rollTypePickerDataSource;
 
     _rollTypeSelector = rollSelector;

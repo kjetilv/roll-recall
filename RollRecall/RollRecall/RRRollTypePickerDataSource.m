@@ -8,14 +8,14 @@
 #import "RRRollTypePickerDataSource.h"
 
 @interface RRRollTypePickerDataSource()
-@property (strong, nonatomic) NSArray *rollTypes;
+@property (strong, nonatomic) NSArray *manufacturers;
 @end
 
 @implementation RRRollTypePickerDataSource
-- (RRRollTypePickerDataSource *)initWith:(NSArray *)rollTypes {
+- (RRRollTypePickerDataSource *)initWith:(NSArray *)manufacturers {
     self = [super init];
     if (self) {
-        _rollTypes = rollTypes;
+        _manufacturers = manufacturers;
     }
     return self;
 }
@@ -25,6 +25,6 @@
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return self.rollTypes.count;
+    return self.manufacturers.count;
 }
 @end

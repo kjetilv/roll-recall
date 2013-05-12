@@ -24,6 +24,7 @@
 		BC9BE7F65EE6B2C9B6A98F64 /* RRRollType.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BEF82260B3BFB6B63D58B /* RRRollType.m */; };
 		BC9BE8FEA2AD076949F3D10D /* 1368149063_Roll.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9BEA3BFC82A9080D384C86 /* 1368149063_Roll.png */; };
 		BC9BEBB446449AA96AF479B3 /* RRRollTypePickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BE8F4ED1D891085D8D357 /* RRRollTypePickerDataSource.m */; };
+		BC9BECAE11E31D124EE8008F /* RRRollManufacturer.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BEECC590DA4A56D140567 /* RRRollManufacturer.m */; };
 		BC9BEF9DC88AED241CB40A52 /* RRRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BEDD1ED8C6799810DC14A /* RRRoll.m */; };
 /* End PBXBuildFile section */
 
@@ -46,6 +47,7 @@
 		3305CF214F5AAD7D9296B240 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		3305CFD55C230487B94338C5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		BC9BE000C4A0BCD46F844FD4 /* RRRollTypePickerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRollTypePickerDataSource.h; sourceTree = "<group>"; };
+		BC9BE180E0B45EFF09E3DAAE /* RRRollManufacturer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRollManufacturer.h; sourceTree = "<group>"; };
 		BC9BE29360438374076F6DB1 /* RRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRDetailViewController.m; sourceTree = "<group>"; };
 		BC9BE5486A078F594036D60A /* RRRollLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRollLoad.h; sourceTree = "<group>"; };
 		BC9BE615B7335E5902334732 /* RRRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRoll.h; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 		BC9BEDD1ED8C6799810DC14A /* RRRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRoll.m; sourceTree = "<group>"; };
 		BC9BEDDB51C84C8D35102FF6 /* RRRollLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRollLoad.m; sourceTree = "<group>"; };
 		BC9BEE72370A149FB853545C /* RRRollType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRollType.h; sourceTree = "<group>"; };
+		BC9BEECC590DA4A56D140567 /* RRRollManufacturer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRollManufacturer.m; sourceTree = "<group>"; };
 		BC9BEF82260B3BFB6B63D58B /* RRRollType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRollType.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -96,6 +99,8 @@
 				BC9BE6CED3D39937CC82812E /* RRRollTypePickerDelegate.h */,
 				BC9BE8F4ED1D891085D8D357 /* RRRollTypePickerDataSource.m */,
 				BC9BE000C4A0BCD46F844FD4 /* RRRollTypePickerDataSource.h */,
+				BC9BEECC590DA4A56D140567 /* RRRollManufacturer.m */,
+				BC9BE180E0B45EFF09E3DAAE /* RRRollManufacturer.h */,
 			);
 			path = RollRecall;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				BC9BE1BC462C9BAE92863E9E /* RRRollLoad.m in Sources */,
 				BC9BE792926E8219FF6F2573 /* RRRollTypePickerDelegate.m in Sources */,
 				BC9BEBB446449AA96AF479B3 /* RRRollTypePickerDataSource.m in Sources */,
+				BC9BECAE11E31D124EE8008F /* RRRollManufacturer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
