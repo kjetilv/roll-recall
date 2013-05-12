@@ -20,6 +20,7 @@
 		3305CFB06FBD25BB381C8992 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305CFD55C230487B94338C5 /* Foundation.framework */; };
 		BC9BE1BC462C9BAE92863E9E /* RRRollLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BEDDB51C84C8D35102FF6 /* RRRollLoad.m */; };
 		BC9BE398175430316BBAAB16 /* RRDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BE29360438374076F6DB1 /* RRDetailViewController.m */; };
+		BC9BE792926E8219FF6F2573 /* RRRollTypePickerDataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BE7A2BC473E2CC507376D /* RRRollTypePickerDataSource.m */; };
 		BC9BE7F65EE6B2C9B6A98F64 /* RRRollType.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BEF82260B3BFB6B63D58B /* RRRollType.m */; };
 		BC9BE8FEA2AD076949F3D10D /* 1368149063_Roll.png in Resources */ = {isa = PBXBuildFile; fileRef = BC9BEA3BFC82A9080D384C86 /* 1368149063_Roll.png */; };
 		BC9BEF9DC88AED241CB40A52 /* RRRoll.m in Sources */ = {isa = PBXBuildFile; fileRef = BC9BEDD1ED8C6799810DC14A /* RRRoll.m */; };
@@ -46,6 +47,8 @@
 		BC9BE29360438374076F6DB1 /* RRDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRDetailViewController.m; sourceTree = "<group>"; };
 		BC9BE5486A078F594036D60A /* RRRollLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRollLoad.h; sourceTree = "<group>"; };
 		BC9BE615B7335E5902334732 /* RRRoll.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRoll.h; sourceTree = "<group>"; };
+		BC9BE6CED3D39937CC82812E /* RRRollTypePickerDataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRRollTypePickerDataSource.h; sourceTree = "<group>"; };
+		BC9BE7A2BC473E2CC507376D /* RRRollTypePickerDataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRollTypePickerDataSource.m; sourceTree = "<group>"; };
 		BC9BEA3BFC82A9080D384C86 /* 1368149063_Roll.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = 1368149063_Roll.png; sourceTree = "<group>"; };
 		BC9BEBB13C041B785A2376D9 /* RRDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RRDetailViewController.h; sourceTree = "<group>"; };
 		BC9BEDD1ED8C6799810DC14A /* RRRoll.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RRRoll.m; sourceTree = "<group>"; };
@@ -86,6 +89,8 @@
 				BC9BE615B7335E5902334732 /* RRRoll.h */,
 				BC9BEDDB51C84C8D35102FF6 /* RRRollLoad.m */,
 				BC9BE5486A078F594036D60A /* RRRollLoad.h */,
+				BC9BE7A2BC473E2CC507376D /* RRRollTypePickerDataSource.m */,
+				BC9BE6CED3D39937CC82812E /* RRRollTypePickerDataSource.h */,
 			);
 			path = RollRecall;
 			sourceTree = "<group>";
@@ -202,6 +207,7 @@
 				BC9BE7F65EE6B2C9B6A98F64 /* RRRollType.m in Sources */,
 				BC9BEF9DC88AED241CB40A52 /* RRRoll.m in Sources */,
 				BC9BE1BC462C9BAE92863E9E /* RRRollLoad.m in Sources */,
+				BC9BE792926E8219FF6F2573 /* RRRollTypePickerDataSource.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

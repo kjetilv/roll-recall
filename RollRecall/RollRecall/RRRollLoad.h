@@ -7,10 +7,8 @@
 
 #import <Foundation/Foundation.h>
 
-
-@interface RRRollLoad : NSObject {
-    NSDate *loadTime;
-    NSDate *unloadTime;
-    int exposures;
-}
+@interface RRRollLoad : NSObject
+@property (readonly, strong, nonatomic) NSDate *loadTime;
+@property (readonly, strong, nonatomic) NSDate *unloadTime;
+@property (readonly, nonatomic) NSUInteger exposures;
 @end

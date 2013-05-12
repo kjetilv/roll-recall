@@ -7,10 +7,19 @@
 
 #import "RRRollLoad.h"
 
-@implementation RRRollLoad {
-}
+@interface RRRollLoad()
+@property (strong, nonatomic) NSDate *loadTime;
+@property (strong, nonatomic) NSDate *unloadTime;
+@property (nonatomic) NSUInteger exposures;
+@end
+
+@implementation RRRollLoad
+
 -(RRRollLoad *)init {
-    loadTime = [NSDate date];
+    self = [super init];
+    if (self) {
+        _loadTime = [NSDate date];
+    }
     return self;
 }
 @end

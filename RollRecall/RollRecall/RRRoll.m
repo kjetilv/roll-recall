@@ -4,27 +4,28 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
-
 #import "RRRoll.h"
 #import "RRRollType.h"
 #import "RRRollLoad.h"
 
+@interface RRRoll()
+@property (strong, nonatomic) RRRollType *type;
+@property (strong, nonatomic) NSMutableArray *loads;
+@property (nonatomic) NSUInteger iso;
+@end
 
-@implementation RRRoll {
-}
+@implementation RRRoll
 
-- (RRRoll *)initWithIso:(NSInteger)value {
+- (RRRoll *)initWithIso:(NSUInteger)iso {
     self = [super init];
-    iso = value;
+    _iso = iso;
+    _loads = [NSMutableArray arrayWithCapacity:0];
     return self;
 }
 
 - (RRRoll *)load {
-    if (loads == Nil) {
-        loads = [NSMutableArray arrayWithCapacity:0];
-    }
     RRRollLoad *load = [[RRRollLoad alloc] init];
-    [loads addObject:load];
+    [_loads addObject:load];
     return self;
 }
 @end

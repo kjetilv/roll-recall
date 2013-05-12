@@ -7,20 +7,30 @@
 #import "RRRollType.h"
 #import "RRRoll.h"
 
-@implementation RRRollType {
-}
-- (RRRollType *)initWith:(NSString *)manufacturer1
-                    name:(NSString *)name1
-                     iso:(NSInteger)iso1
-                  format:(RRRollSize)format1 {
+@interface RRRollType()
+@property (strong, nonatomic) NSString *manufacturer;
+@property (nonatomic) enum RRRollSize format;
+@property (nonatomic) NSUInteger iso;
+@property (strong, nonatomic) NSString *name;
+@end
+
+@implementation RRRollType
+
+-(RRRollType *)initWith:(NSString *)manufacturer
+                   name:(NSString *)name
+                    iso:(NSUInteger)iso
+                 format:(RRRollSize)format {
     self = [super init];
-    manufacturer = manufacturer1;
-    format = format1;
-    iso = iso1;
-    name = name1;
+    if (self) {
+        _manufacturer = manufacturer;
+        _format = format;
+        _iso = iso;
+        _name = name;
+    }
+    return self;
 }
 
-- (RRRoll *)newRoll:(NSInteger)value {
+-(RRRoll *)newRoll:(NSUInteger)value {
     return [[RRRoll alloc] initWithIso:value];
 }
 @end

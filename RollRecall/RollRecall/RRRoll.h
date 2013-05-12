@@ -10,11 +10,10 @@
 @class RRRollType;
 
 @interface RRRoll : NSObject
-{
-    RRRollType *type;
-    NSMutableArray *loads;
-    NSInteger iso;
-}
--(RRRoll *)initWithIso:(NSInteger)value;
+@property (readonly, strong, nonatomic) RRRollType *type;
+@property (readonly,strong, nonatomic) NSMutableArray *loads;
+@property (readonly,nonatomic) NSUInteger iso;
+
+-(RRRoll *)initWithIso:(NSUInteger)iso;
 -(RRRoll *)load;
 @end
