@@ -7,5 +7,5 @@
 @end
 
 @interface RRDetailViewController : UIViewController
-@property(nonatomic, strong) id<RRDetailViewControllerDelegate> delegate;
+@property(nonatomic, weak) id<RRDetailViewControllerDelegate> delegate;
 @end
