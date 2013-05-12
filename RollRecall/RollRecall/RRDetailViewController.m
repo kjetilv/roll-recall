@@ -12,6 +12,7 @@
 @property (strong, nonatomic) UIImageView *rollImageView;
 @property (strong, nonatomic) UITextView *rollTypeView;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
+
 @end
 
 @implementation RRDetailViewController
@@ -35,7 +36,6 @@
     textView.text = @"Tri-X 400";
     textView.font = [UIFont systemFontOfSize:14];
     textView.textColor = [UIColor blackColor];
-    textView.backgroundColor = [UIColor whiteColor];
     self.rollTypeView = textView;
 
     [rootView addSubview:self.rollImageView];

@@ -48,7 +48,7 @@
 - (void)addRoll {
     RRDetailViewController *controller = [[RRDetailViewController alloc] init];
     controller.delegate = self;
-    controller.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+    controller.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentViewController:controller animated:YES completion:nil];
 }
 
