@@ -7,7 +7,7 @@
 
 #import "RRRollLoad.h"
 
-@interface RRRollLoad()
+@interface RRRollLoad ()
 @property (strong, nonatomic) NSDate *loadTime;
 @property (strong, nonatomic) NSDate *unloadTime;
 @property (nonatomic) NSUInteger exposures;
@@ -20,6 +20,11 @@
     if (self) {
         _loadTime = [NSDate date];
     }
+    return self;
+}
+
+-(RRRollLoad *)unloaded {
+    _unloadTime = [NSDate date];
     return self;
 }
 @end

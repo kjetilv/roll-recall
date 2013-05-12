@@ -7,14 +7,17 @@
 #import "NSLayoutConstraint+Util.h"
 #import "RRDetailViewController.h"
 #import "RRRollType.h"
+#import "RRRollTypePickerDelegate.h"
 #import "RRRollTypePickerDataSource.h"
 
 @interface RRDetailViewController()
 // private properties
 @property (strong, nonatomic) UIImageView *rollImageView;
+@property (strong, nonatomic) UILabel *rollTypeSelected;
 @property (strong, nonatomic) UIPickerView *rollTypeSelector;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
-@property (strong, nonatomic) RRRollTypePickerDataSource *dataSource;
+@property (strong, nonatomic) RRRollTypePickerDelegate *rollTypePickerDelegate;
+@property (strong, nonatomic) RRRollTypePickerDataSource *rollTypePickerDataSource;
 @end
 
 @implementation RRDetailViewController
@@ -34,12 +37,28 @@
     imageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
     _rollImageView = imageView;
 
+    UILabel *selectedView = [[UILabel alloc] init];
+    selectedView.text = @"No type selected";
+    _rollTypeSelected = selectedView;
+
+    NSArray *rollTypes = @[
+            [[RRRollType alloc] initWith:@"Kodak" name:@"Tri-X" iso:400 format:_135],
+            [[RRRollType alloc] initWith:@"Foma" name:@"Fomapan Profi Action Line" iso:400 format:_135],
+            [[RRRollType alloc] initWith:@"Ilford" name:@"HP5-Plus" iso:400 format:_135]
+    ];
+
     UIPickerView *rollSelector = [[UIPickerView alloc] init];
-    _dataSource = [[RRRollTypePickerDataSource alloc] init];
-    rollSelector.dataSource = _dataSource;
+
+    _rollTypePickerDelegate = [[RRRollTypePickerDelegate alloc] initWith: rollTypes];
+    rollSelector.delegate = _rollTypePickerDelegate;
+
+    _rollTypePickerDataSource = [[RRRollTypePickerDataSource alloc] initWith: rollTypes];
+    rollSelector.dataSource = _rollTypePickerDataSource;
+
     _rollTypeSelector = rollSelector;
 
     [rootView addSubview:_rollImageView];
+    [rootView addSubview:_rollTypeSelected];
     [rootView addSubview:_rollTypeSelector];
 
     [self setupLayout:rootView];
@@ -48,20 +67,22 @@
 }
 
 - (void)setupLayout:(UIView *)rootView {
-    UIView *navigation = self.navigationBar;
-    UIView *image = self.rollImageView;
-    UIView *type = self.rollTypeSelector;
+    UIView *navigation = _navigationBar;
+    UIView *image = _rollImageView;
+    UIView *selected = _rollTypeSelected;
+    UIView *selector = _rollTypeSelector;
 
-    NSDictionary *views = NSDictionaryOfVariableBindings(navigation, image, type);
+    NSDictionary *views = NSDictionaryOfVariableBindings(navigation, image, selected, selector);
     for (UIView *view in views.allValues) {
         view.translatesAutoresizingMaskIntoConstraints = NO;
     }
 
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[navigation]-|" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[navigation]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[type(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[selected(==100)]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[image(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[type(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[selected(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[selector(==100)]" views:views]];
 }
 
 - (void)saveAndExit {

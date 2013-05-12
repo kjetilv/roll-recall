@@ -7,7 +7,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface RRRollTypePickerDataSource : UIViewController<UIPickerViewDataSource>
+@interface RRRollTypePickerDelegate : UIViewController<UIPickerViewDelegate>
 @property (readonly, strong, nonatomic) NSArray *rollTypes;
--(RRRollTypePickerDataSource *)initWith:(NSArray *)rollTypes;
+-(RRRollTypePickerDelegate *)initWith:(NSArray *)rollTypes;
 @end

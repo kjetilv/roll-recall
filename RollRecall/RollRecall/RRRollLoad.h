@@ -11,4 +11,6 @@
 @property (readonly, strong, nonatomic) NSDate *loadTime;
 @property (readonly, strong, nonatomic) NSDate *unloadTime;
 @property (readonly, nonatomic) NSUInteger exposures;
+
+- (RRRollLoad *)init;
 @end
