@@ -24,7 +24,7 @@
 }
 
 -(RRRollLoad *)unloaded {
-    _unloadTime = [NSDate date];
+    self.unloadTime = [NSDate date];
     return self;
 }
 @end

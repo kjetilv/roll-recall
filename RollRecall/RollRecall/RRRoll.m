@@ -25,7 +25,7 @@
 
 - (RRRoll *)load {
     RRRollLoad *load = [[RRRollLoad alloc] init];
-    [_loads addObject:load];
+    [self.loads addObject:load];
     return self;
 }
 @end

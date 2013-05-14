@@ -23,7 +23,7 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)thePickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    RRRollType *film = [self.rollTypes objectAtIndex: row];
+    RRRollType *film = [self.rollTypes objectAtIndex:row];
     switch (component) {
         case 0: {
             return film.manufacturer;
@@ -38,4 +38,5 @@
             return nil;
     }
 }
+
 @end

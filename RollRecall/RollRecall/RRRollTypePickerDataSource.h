@@ -9,5 +9,5 @@
 
 @interface RRRollTypePickerDataSource : UIViewController<UIPickerViewDataSource>
 @property (readonly, strong, nonatomic) NSArray *rollTypes;
--(RRRollTypePickerDataSource *)initWith:(NSArray *)rollTypes;
+- (RRRollTypePickerDataSource *)initWith:(NSArray *)rollTypes;
 @end
