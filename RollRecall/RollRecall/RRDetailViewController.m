@@ -26,21 +26,21 @@
 - (void)loadView {
     UIView *rootView = [[UIView alloc] init];
 
-    _navigationBar = [[UINavigationBar alloc] init];
+    self.navigationBar = [[UINavigationBar alloc] init];
     UINavigationItem *navigationItem = [[UINavigationItem alloc] initWithTitle:@"Roll"];
     UIBarButtonItem *addButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Save" style:UIBarButtonItemStylePlain
                                                                      target:self action:@selector(saveAndExit)];
     navigationItem.rightBarButtonItem = addButtonItem;
-    [_navigationBar pushNavigationItem:navigationItem animated:NO];
-    [rootView addSubview:_navigationBar];
+    [self.navigationBar pushNavigationItem:navigationItem animated:NO];
+    [rootView addSubview:self.navigationBar];
 
     UIImageView *imageView = [[UIImageView alloc] init];
     imageView.image = [UIImage imageNamed: @"1368149063_Roll.png"];
-    _rollImageView = imageView;
+    self.rollImageView = imageView;
 
     UILabel *selectedView = [[UILabel alloc] init];
     selectedView.text = @"No type selected";
-    _rollTypeSelected = selectedView;
+    self.rollTypeSelected = selectedView;
 
     NSArray *manufacturers = @[
             [[RRRollManufacturer alloc] initWith: @"Kodak" rollTypes: @[
@@ -75,17 +75,17 @@
 
     UIPickerView *rollSelector = [[UIPickerView alloc] init];
 
-    _rollTypePickerDelegate = [[RRRollTypePickerDelegate alloc] initWith:manufacturers];
+    _rollTypePickerDelegate = [[RRRollTypePickerDelegate alloc] initWith: rollTypes];
     rollSelector.delegate = _rollTypePickerDelegate;
 
-    _rollTypePickerDataSource = [[RRRollTypePickerDataSource alloc] initWith:manufacturers];
+    _rollTypePickerDataSource = [[RRRollTypePickerDataSource alloc] initWith: rollTypes];
     rollSelector.dataSource = _rollTypePickerDataSource;
 
-    _rollTypeSelector = rollSelector;
+    self.rollTypeSelector = rollSelector;
 
-    [rootView addSubview:_rollImageView];
-    [rootView addSubview:_rollTypeSelected];
-    [rootView addSubview:_rollTypeSelector];
+    [rootView addSubview:self.rollImageView];
+    [rootView addSubview:self.rollTypeSelected];
+    [rootView addSubview:self.rollTypeSelector];
 
     [self setupLayout:rootView];
 
@@ -93,10 +93,10 @@
 }
 
 - (void)setupLayout:(UIView *)rootView {
-    UIView *navigation = _navigationBar;
-    UIView *image = _rollImageView;
-    UIView *selected = _rollTypeSelected;
-    UIView *selector = _rollTypeSelector;
+    UIView *navigation = self.navigationBar;
+    UIView *image = self.rollImageView;
+    UIView *selected = self.rollTypeSelected;
+    UIView *selector = self.rollTypeSelector;
 
     NSDictionary *views = NSDictionaryOfVariableBindings(navigation, image, selected, selector);
     for (UIView *view in views.allValues) {
