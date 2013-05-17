@@ -41,13 +41,12 @@
     self.rollImageView = imageView;
 
     UILabel *selectedView = [[UILabel alloc] init];
-    selectedView.text = @"No type selected";
     self.rollTypeSelected = selectedView;
 
     self.manufacturer = 0;
     self.manufacturers = @[
             [[RRRollManufacturer alloc] initWith: @"Kodak" rollTypes: @[
-                    [[RRRollType alloc] initWith: @"Tri-X" iso:320 filmType:negative_bw formats:
+                    [[RRRollType alloc] initWith: @"Tri-X" iso:400 filmType:negative_bw formats:
                             @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"T-Max" iso:400 filmType:negative_bw formats:
                             @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
@@ -105,9 +104,18 @@
     [rootView addSubview:self.rollTypeSelector];
     [rootView addSubview:self.formatSelector];
 
+    [self updateSelected];
     [self setupLayout:rootView];
 
     self.view = rootView;
+}
+
+- (void)updateSelected {
+    RRRollManufacturer *manu = [_manufacturers objectAtIndex: _manufacturer];
+    RRRollType *roll = [manu.rollTypes objectAtIndex: _rollType];
+    RRFilmType format = (RRFilmType) [roll.formats objectAtIndex: _format];
+
+    _rollTypeSelected.text = [NSString stringWithFormat:@"%@ %@ %d ISO (%d)", manu.name, roll.name, roll.iso, format];
 }
 
 - (void)setupLayout:(UIView *)rootView {
@@ -125,10 +133,10 @@
 
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[navigation]-|" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[navigation]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[selected(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[mselector(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[rselector(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[fselector(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[selected(==150)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[mselector(==250)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[rselector(==250)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[fselector(==250)]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[image(==100)]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[selected(==100)]-[mselector(==100)]-[rselector(==100)]-[fselector(==100)]" views:views]];
 }
@@ -136,13 +144,17 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (pickerView == _manufacturerSelector) {
         _manufacturer = (NSUInteger) row;
+        [_rollTypeSelector reloadAllComponents];
+        [_formatSelector reloadAllComponents];
     }
     if (pickerView == _rollTypeSelector) {
         _rollType = (NSUInteger) row;
+        [_formatSelector reloadAllComponents];
     }
     if (pickerView == _formatSelector) {
         _format = (NSUInteger) row;
     }
+    [self updateSelected];
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -173,7 +185,7 @@
     if (pickerView == _rollTypeSelector) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
         RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) row];
-        return roll.name;
+        return [NSString stringWithFormat:@"%@ %dISO", roll.name, roll.iso];
     }
     if (pickerView == _formatSelector) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
