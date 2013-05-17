@@ -48,52 +48,51 @@
     self.manufacturers = @[
             [[RRRollManufacturer alloc] initWith: @"Kodak" rollTypes: @[
                     [[RRRollType alloc] initWith: @"Tri-X" iso:320 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"T-Max" iso:400 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"T-Max" iso:100 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"T-Max" iso:400 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"T-Max" iso:3200 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]]]
             ],
             [[RRRollManufacturer alloc] initWith: @"Foma" rollTypes: @[
                     [[RRRollType alloc] initWith: @"Fomapan" iso:100 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"Fomapan" iso:200 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"Fomapan" iso:400 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]]]
             ],
             [[RRRollManufacturer alloc] initWith: @"FujiFilm" rollTypes: @[
                     [[RRRollType alloc] initWith: @"Neopan" iso:400 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]]]
             ],
             [[RRRollManufacturer alloc] initWith: @"Ilford" rollTypes: @[
                     [[RRRollType alloc] initWith: @"HP5 Plus" iso:400 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"FP4 Plus" iso:125 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]],
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]],
                     [[RRRollType alloc] initWith: @"PanF Plus" iso:50 filmType:negative_bw formats:
-                            @[[NSNumber numberWithInt: _120], [NSNumber numberWithInt: _135]]]]
+                            @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]]]
             ]
     ];
 
     UIPickerView *manufacturerSelector = [[UIPickerView alloc] init];
     manufacturerSelector.delegate = self;
     manufacturerSelector.dataSource = self;
+    self.manufacturerSelector = manufacturerSelector;
 
     UIPickerView *rollSelector = [[UIPickerView alloc] init];
     rollSelector.delegate = self;
     rollSelector.dataSource = self;
+    self.rollTypeSelector = rollSelector;
 
     UIPickerView *formatSelector = [[UIPickerView alloc] init];
     formatSelector.delegate = self;
     formatSelector.dataSource = self;
-
-    self.manufacturerSelector = manufacturerSelector;
-    self.rollTypeSelector = rollSelector;
     self.formatSelector = formatSelector;
 
     self.manufacturer = 0;
@@ -127,11 +126,11 @@
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[navigation]-|" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[navigation]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[image(==100)]-[selected(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[mselector(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[rselector(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[fselector(==100)]" views:views]];
     [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[image(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[selected(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[mselector(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[rselector(==100)]" views:views]];
-    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[fselector(==100)]" views:views]];
+    [rootView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:[navigation]-[selected(==100)]-[mselector(==100)]-[rselector(==100)]-[fselector(==100)]" views:views]];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
@@ -159,7 +158,7 @@
         RRRollType *rType = [manu.rollTypes objectAtIndex: _rollType];
         return [rType.formats count];
     }
-    return -1;
+    return 0;
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -167,21 +166,19 @@
   }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    RRRollManufacturer *manufacturer = [self.manufacturers objectAtIndex: (NSUInteger)row];
     if (pickerView == _manufacturerSelector) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) row];
         return manu.name;
     }
     if (pickerView == _rollTypeSelector) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
-        RRRollType *rollType = [manu.rollTypes objectAtIndex:(NSUInteger) row];
-        return rollType.name;
+        RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) row];
+        return roll.name;
     }
     if (pickerView == _formatSelector) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
-        RRRollType *rollType = [manu.rollTypes objectAtIndex:(NSUInteger) _rollType];
-        NSArray *formats = rollType.formats;
-        return [formats objectAtIndex:(NSUInteger) row];
+        RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) _rollType];
+        return [NSString stringWithFormat:@"%@", [roll.formats objectAtIndex:(NSUInteger) row]];
     }
     return nil;
 }

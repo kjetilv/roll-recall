@@ -10,12 +10,12 @@
 @class RRRoll;
 
 typedef enum RRRollSize : NSUInteger {
-    _110 = 0,
-    _120 = 1,
-    _126 = 2,
-    _127 = 3,
-    _135 = 4,
-    _220 = 5
+    _110 = 110,
+    _120 = 120,
+    _126 = 126,
+    _127 = 127,
+    _135 = 135,
+    _220 = 220
 } RRRollSize;
 
 typedef enum RRFilmType: NSUInteger {
