@@ -10,6 +10,7 @@
 @interface RRRollType()
 @property (nonatomic) NSUInteger iso;
 @property (strong, nonatomic) NSString *name;
+@property (nonatomic) RRFilmType filmType;
 @property (strong, nonatomic) NSArray *formats;
 @end
 
@@ -17,12 +18,14 @@
 
 -(RRRollType *)initWith:(NSString *)name
                     iso:(NSUInteger)iso
-                 formats:(NSArray *)formats {
+               filmType:(RRFilmType)filmType
+                formats:(NSArray *)formats {
     self = [super init];
     if (self) {
-        _formats = formats;
-        _iso = iso;
         _name = name;
+        _iso = iso;
+        _filmType = filmType;
+        _formats = formats;
     }
     return self;
 }

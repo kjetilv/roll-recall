@@ -15,16 +15,26 @@ typedef enum RRRollSize : NSUInteger {
     _126 = 2,
     _127 = 3,
     _135 = 4,
-    _220 = 5,
-
-    size = 6
+    _220 = 5
 } RRRollSize;
+
+typedef enum RRFilmType: NSUInteger {
+    c41 = 0,
+    negative_color = 1,
+    negative_bw = 2,
+    reversal_color= 3,
+    reversal_bw = 4
+} RRFilmType;
 
 @interface RRRollType : NSObject
 @property (readonly, nonatomic) NSUInteger iso;
 @property (readonly, nonatomic) NSArray* formats;
+@property (readonly, nonatomic) RRFilmType filmType;
 @property (readonly, strong, nonatomic) NSString *name;
 
-- (RRRollType *)initWith:(NSString *)manufacturer name:(NSString *)name iso:(NSUInteger)iso formats:(NSArray *)formats;
+- (RRRollType *)initWith:(NSString *)name
+                     iso:(NSUInteger)iso
+                filmType:(RRFilmType)filmType
+                 formats:(NSArray *)formats;
 - (RRRoll *)newRoll:(NSUInteger)iso;
 @end
