@@ -4,29 +4,58 @@
 // To change the template use AppCode | Preferences | File Templates.
 //
 
+#import <CoreLocation/CoreLocation.h>
 #import "NSLayoutConstraint+Util.h"
 #import "RRDetailViewController.h"
 #import "RRRollType.h"
 #import "RRRollManufacturer.h"
 #import "PickerViewPopup.h"
 
-@interface RRDetailViewController() <UIPickerViewDelegate, UIPickerViewDataSource, PickerViewPopupDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface RRDetailViewController()
+        <UIPickerViewDelegate,
+         UIPickerViewDataSource,
+         PickerViewPopupDelegate,
+         UITableViewDelegate,
+         UITableViewDataSource,
+         CLLocationManagerDelegate>
 // private properties
 @property (strong, nonatomic) UIImageView *rollImageView;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 @property (strong, nonatomic) NSArray *manufacturers;
+@property (strong, nonatomic) NSArray *isoValues;
 @property (strong, nonatomic) UITableView *filmSelectTable;
 @property (nonatomic) NSUInteger manufacturer;
 @property (nonatomic) NSUInteger rollType;
 @property (nonatomic) NSUInteger format;
+@property (nonatomic) NSUInteger iso;
 @property (nonatomic) NSUInteger currentPickings;
 @property (strong, nonatomic) PickerViewPopup *valuePicker;
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLLocation *lastLocation;
 @end
 
 @implementation RRDetailViewController
 
 - (void)buttonClicked {
-    _valuePicker.hidden = YES;
+    self.valuePicker.hidden = YES;
+}
+
+- (RRRollManufacturer *)getSelectedManufacturer {
+    return [self.manufacturers objectAtIndex:(NSUInteger) self.manufacturer];
+}
+
+- (RRRollType *)getSelectedRollType {
+    RRRollManufacturer *manufacturer = self.getSelectedManufacturer;
+    return [manufacturer.rollTypes objectAtIndex:self.rollType];
+}
+
+- (RRRollSize)getSelectedRollSize {
+    RRRollType *type = self.getSelectedRollType;
+    return (RRRollSize)[type.formats objectAtIndex: self.format];
+}
+
+- (NSUInteger)getSelectedISO {
+    return (NSUInteger) [self.isoValues objectAtIndex:self.iso];
 }
 
 - (void)loadView {
@@ -46,6 +75,13 @@
     picker.picker.delegate = self;
     picker.picker.dataSource = self;
     self.valuePicker = picker;
+
+    CLLocationManager *location = [[CLLocationManager alloc] init];
+    location.delegate = self;
+    location.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+    location.distanceFilter = 3000;
+    [location startUpdatingLocation];
+    self.locationManager = location;
 
     UITableView *tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 250, 1000) style:UITableViewStyleGrouped];
     tableView.delegate = self;
@@ -92,10 +128,44 @@
                             @[[NSNumber numberWithInt: _135], [NSNumber numberWithInt: _120]]]]
             ]
     ];
+    self.isoValues = @[
+            [NSNumber numberWithInt: 6 ],
+            [NSNumber numberWithInt: 8 ],
+            [NSNumber numberWithInt: 10 ],
+            [NSNumber numberWithInt: 12 ],
+            [NSNumber numberWithInt: 16 ],
+            [NSNumber numberWithInt: 20 ],
+            [NSNumber numberWithInt: 25 ],
+            [NSNumber numberWithInt: 32 ],
+            [NSNumber numberWithInt: 40 ],
+            [NSNumber numberWithInt: 50 ],
+            [NSNumber numberWithInt: 64 ],
+            [NSNumber numberWithInt: 80 ],
+            [NSNumber numberWithInt: 100 ],
+            [NSNumber numberWithInt: 125 ],
+            [NSNumber numberWithInt: 160 ],
+            [NSNumber numberWithInt: 200 ],
+            [NSNumber numberWithInt: 250 ],
+            [NSNumber numberWithInt: 320 ],
+            [NSNumber numberWithInt: 400 ],
+            [NSNumber numberWithInt: 500 ],
+            [NSNumber numberWithInt: 640 ],
+            [NSNumber numberWithInt: 800 ],
+            [NSNumber numberWithInt: 1000 ],
+            [NSNumber numberWithInt: 1250 ],
+            [NSNumber numberWithInt: 1600 ],
+            [NSNumber numberWithInt: 2000 ],
+            [NSNumber numberWithInt: 2500 ],
+            [NSNumber numberWithInt: 3200 ],
+            [NSNumber numberWithInt: 4000 ],
+            [NSNumber numberWithInt: 5000 ],
+            [NSNumber numberWithInt: 6400 ],
+    ];
 
     self.manufacturer = 0;
     self.rollType = 0;
     self.format = 0;
+    self.iso = 12;
 
     [rootView addSubview:self.rollImageView];
     [rootView addSubview:self.filmSelectTable];
@@ -128,13 +198,16 @@
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (self.currentPickings == 0) {
-        _manufacturer = (NSUInteger) row;
+        self.manufacturer = (NSUInteger) row;
     }
     if (self.currentPickings == 1) {
-        _rollType = (NSUInteger) row;
+        self.rollType = (NSUInteger) row;
     }
     if (self.currentPickings == 2) {
-        _format = (NSUInteger) row;
+        self.format = (NSUInteger) row;
+    }
+    if (self.currentPickings == 3) {
+        self.iso = (NSUInteger) row;
     }
 
     [self.filmSelectTable reloadData];
@@ -143,16 +216,19 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (self.currentPickings == 0) {
-        return [_manufacturers count];
+        return [self.manufacturers count];
     }
     if (self.currentPickings == 1) {
-        RRRollManufacturer *manu = [_manufacturers objectAtIndex: _manufacturer];
+        RRRollManufacturer *manu = [self.manufacturers objectAtIndex: self.manufacturer];
         return [manu.rollTypes count];
     }
     if (self.currentPickings == 2) {
-        RRRollManufacturer *manu = [_manufacturers objectAtIndex: _manufacturer];
-        RRRollType *rType = [manu.rollTypes objectAtIndex: _rollType];
+        RRRollManufacturer *manu = [self.manufacturers objectAtIndex: self.manufacturer];
+        RRRollType *rType = [manu.rollTypes objectAtIndex: self.rollType];
         return [rType.formats count];
+    }
+    if (self.currentPickings == 3) {
+        return [self.isoValues count];
     }
     return 0;
 }
@@ -161,36 +237,29 @@
     return 1;
 }
 
-- (RRRollManufacturer *)getSelectedManufacturer {
-    return [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
-}
-
-- (RRRollType *)getSelectedRollType {
-    RRRollManufacturer *manufacturer = self.getSelectedManufacturer;
-    return [manufacturer.rollTypes objectAtIndex:_rollType];
-}
-
-- (RRRollSize)getSelectedRollSize {
-    RRRollType *type = self.getSelectedRollType;
-    return (RRRollSize)[type.formats objectAtIndex: _format];
-}
-
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (self.currentPickings == 0) {
-        RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) row];
+        RRRollManufacturer *manu = [self.manufacturers objectAtIndex:(NSUInteger) row];
         return manu.name;
     }
     if (self.currentPickings == 1) {
-        RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
+        RRRollManufacturer *manu = [self.manufacturers objectAtIndex:(NSUInteger) self.manufacturer];
         RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) row];
         return [NSString stringWithFormat:@"%@ ISO%d", roll.name, roll.iso];
     }
     if (self.currentPickings == 2) {
-        RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
-        RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) _rollType];
+        RRRollManufacturer *manu = [self.manufacturers objectAtIndex:(NSUInteger) self.manufacturer];
+        RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) self.rollType];
         return [NSString stringWithFormat:@"%@", [roll.formats objectAtIndex:(NSUInteger) row]];
     }
+    if (self.currentPickings == 3) {
+        return [NSString stringWithFormat:@"%@", [self.isoValues objectAtIndex:(NSUInteger) row]];
+    }
     return nil;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
+    self.lastLocation = [locations lastObject];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -207,66 +276,105 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     switch (section) {
         case 0: return 3;
-        default: return 1;
+        default: return 3;
     }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
-        self.valuePicker.hidden = NO;
-        self.currentPickings = (NSUInteger) indexPath.row;
-        [self.valuePicker.picker reloadAllComponents];
+    NSInteger selectedRow;
+    switch (indexPath.section) {
+        case 0 :
+            self.currentPickings = (NSUInteger) indexPath.row;
+            selectedRow = self.currentPickings == 0 ? self.manufacturer
+                    : self.currentPickings == 1 ? self.rollType
+                            : self.currentPickings == 2 ? self.format
+                                    : 0;
+            break;
+        case 1:
+            if (indexPath.row == 0) {
+                self.currentPickings = (NSUInteger) (3 + indexPath.row);
+                selectedRow = self.currentPickings == 3 ? self.iso
+                        : 0;
+            }
+            break;
+        default:
+            break;
+    }
+    self.valuePicker.hidden = NO;
+    [self.valuePicker.picker reloadAllComponents];
+    if (selectedRow > 0) {
+        [self.valuePicker.picker selectRow:selectedRow inComponent:0 animated:YES];
     }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
 
-    if (indexPath.section == 0) {
+    UILabel *heading = [[UILabel alloc] init];
+    heading.backgroundColor = [UIColor clearColor];
+    UILabel *value= [[UILabel alloc] init];
+    value.backgroundColor = [UIColor clearColor];
 
-        UIView *cellView = [[UIView alloc] init];
+    UIView *cellView = [[UIView alloc] init];
 
-        UILabel *heading = [[UILabel alloc] init];
-        heading.backgroundColor = [UIColor clearColor];
-        UILabel *value= [[UILabel alloc] init];
-        value.backgroundColor = [UIColor clearColor];
-
-        switch (indexPath.row) {
-            case 0:
-                heading.text = @"Manufacturer";
-                value.text = self.getSelectedManufacturer.name;
-                break;
-            case 1:
-                heading.text = @"Film";
-                value.text = [NSString stringWithFormat:@"%@ ISO%d",
-                                self.getSelectedRollType.name,
-                                self.getSelectedRollType.iso];
-                break;
-            default:
-                heading.text = @"Format";
-                value.text = [NSString stringWithFormat:@"%@", self.getSelectedRollSize];
-                break;
-        }
-
-        [cellView addSubview: heading];
-        [cellView addSubview: value];
-
-        NSDictionary *views = NSDictionaryOfVariableBindings(heading, value, cellView);
-        for (UIView *view in views.allValues) {
-            view.translatesAutoresizingMaskIntoConstraints = NO;
-        }
-        [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[heading]" views:views]];
-        [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[value]-0-|" views:views]];
-        [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[heading]-0-|" views:views]];
-        [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[value]-0-|" views:views]];
-
-        [cell.contentView addSubview:cellView];
-        [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-9-[cellView]-9-|" views:views]];
-        [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[cellView]-9-|" views:views]];
-
-    } else {
-        cell.textLabel.text = @"ISO";
+    switch (indexPath.section) {
+        case 0 :
+            switch (indexPath.row) {
+                case 0:
+                    heading.text = @"Manufacturer";
+                    value.text = self.getSelectedManufacturer.name;
+                    break;
+                case 1:
+                    heading.text = @"Film";
+                    value.text = [NSString stringWithFormat:@"%@ ISO%d",
+                                                            self.getSelectedRollType.name,
+                                                            self.getSelectedRollType.iso];
+                    break;
+                case 2:
+                    heading.text = @"Format";
+                    value.text = [NSString stringWithFormat:@"%@", self.getSelectedRollSize];
+                    break;
+                default:
+                    break;
+            }
+            break;
+        case 1 :
+            switch (indexPath.row) {
+                case 0:
+                    heading.text = @"ISO";
+                    value.text = [NSString stringWithFormat:@"%@", self.getSelectedISO];
+                    break;
+                case 1:
+                    heading.text = @"Date";
+                    value.text = [NSString stringWithFormat:@"%@", [NSDate date]];
+                    [NSDate date];
+                    break;
+                case 2:
+                    heading.text = @"Location";
+                    value.text = self.lastLocation == nil ? @"X" : self.lastLocation.description;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
     }
+
+    [cellView addSubview: heading];
+    [cellView addSubview: value];
+
+    NSDictionary *views = NSDictionaryOfVariableBindings(heading, value, cellView);
+    for (UIView *view in views.allValues) {
+        view.translatesAutoresizingMaskIntoConstraints = NO;
+    }
+    [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[heading]" views:views]];
+    [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:[value]-0-|" views:views]];
+    [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[heading]-0-|" views:views]];
+    [cellView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-0-[value]-0-|" views:views]];
+
+    [cell.contentView addSubview:cellView];
+    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-9-[cellView]-9-|" views:views]];
+    [cell.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|-9-[cellView]-9-|" views:views]];
 
     return cell;
 }

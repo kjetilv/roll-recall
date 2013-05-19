@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2486400017496E2100E44AFF /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24863FFE17496E2100E44AFF /* CoreData.framework */; };
+		2486400117496E2100E44AFF /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 24863FFF17496E2100E44AFF /* CoreLocation.framework */; };
 		3305C23AE27827970FAE70C0 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305CEE7D9B86389068ABD87 /* CoreGraphics.framework */; };
 		3305C349BA9DC0C3FD704743 /* NSLayoutConstraint+Util.m in Sources */ = {isa = PBXBuildFile; fileRef = 3305CA4CE5E6763E3879DC0F /* NSLayoutConstraint+Util.m */; };
 		3305C3C7B9A3DD5E8AFCF028 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3305C1126CBE311136BA8645 /* UIKit.framework */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24863FFE17496E2100E44AFF /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		24863FFF17496E2100E44AFF /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3305C1126CBE311136BA8645 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3305C15C09176C7FFDFBC176 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 		3305C199B1E53C6AC992BC4F /* RollRecall-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RollRecall-Prefix.pch"; sourceTree = "<group>"; };
@@ -65,6 +69,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2486400017496E2100E44AFF /* CoreData.framework in Frameworks */,
+				2486400117496E2100E44AFF /* CoreLocation.framework in Frameworks */,
 				3305C3C7B9A3DD5E8AFCF028 /* UIKit.framework in Frameworks */,
 				3305CFB06FBD25BB381C8992 /* Foundation.framework in Frameworks */,
 				3305C23AE27827970FAE70C0 /* CoreGraphics.framework in Frameworks */,
@@ -113,6 +119,8 @@
 		3305CBFA13A8A406CAD95A24 = {
 			isa = PBXGroup;
 			children = (
+				24863FFE17496E2100E44AFF /* CoreData.framework */,
+				24863FFF17496E2100E44AFF /* CoreLocation.framework */,
 				3305CD82B132C11EB68B045F /* Products */,
 				3305C710638F3D7B6A167799 /* Frameworks */,
 				3305C4AE5D937D44B84B3367 /* RollRecall */,
@@ -330,6 +338,7 @@
 				3305CA98CBE78A7BCD771D47 /* Debug */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
