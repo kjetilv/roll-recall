@@ -13,9 +13,6 @@
 @interface RRDetailViewController() <UIPickerViewDelegate, UIPickerViewDataSource, PickerViewPopupDelegate, UITableViewDelegate, UITableViewDataSource>
 // private properties
 @property (strong, nonatomic) UIImageView *rollImageView;
-@property (strong, nonatomic) UIPickerView *manufacturerSelector;
-@property (strong, nonatomic) UIPickerView *rollTypeSelector;
-@property (strong, nonatomic) UIPickerView *formatSelector;
 @property (strong, nonatomic) UINavigationBar *navigationBar;
 @property (strong, nonatomic) NSArray *manufacturers;
 @property (strong, nonatomic) UITableView *filmSelectTable;
@@ -96,10 +93,6 @@
             ]
     ];
 
-    self.manufacturerSelector = ([self newSelector]);
-    self.rollTypeSelector = [self newSelector];
-    self.formatSelector = [self newSelector];
-
     self.manufacturer = 0;
     self.rollType = 0;
     self.format = 0;
@@ -108,24 +101,9 @@
     [rootView addSubview:self.filmSelectTable];
     [rootView addSubview:self.valuePicker];
 
-    [self updateSelected];
     [self setupLayout:rootView];
 
     self.view = rootView;
-}
-
-- (UIPickerView *)newSelector {
-    UIPickerView *sel = [[UIPickerView alloc] init];
-    sel.delegate = self;
-    sel.dataSource = self;
-    sel.showsSelectionIndicator = YES;
-    return sel;
-}
-
-- (void)updateSelected {
-    RRRollManufacturer *manu = [_manufacturers objectAtIndex: _manufacturer];
-    RRRollType *roll = [manu.rollTypes objectAtIndex: _rollType];
-    RRFilmType format = (RRFilmType) [roll.formats objectAtIndex: _format];
 }
 
 - (void)setupLayout:(UIView *)rootView {
@@ -151,17 +129,16 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if (self.currentPickings == 0) {
         _manufacturer = (NSUInteger) row;
-        [_rollTypeSelector reloadAllComponents];
-        [_formatSelector reloadAllComponents];
     }
     if (self.currentPickings == 1) {
         _rollType = (NSUInteger) row;
-        [_formatSelector reloadAllComponents];
     }
     if (self.currentPickings == 2) {
         _format = (NSUInteger) row;
     }
-    [self updateSelected];
+
+    [self.filmSelectTable reloadData];
+    self.valuePicker.hidden = YES;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
@@ -206,7 +183,7 @@
     if (self.currentPickings == 1) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
         RRRollType *roll = [manu.rollTypes objectAtIndex:(NSUInteger) row];
-        return [NSString stringWithFormat:@"%@ %dISO", roll.name, roll.iso];
+        return [NSString stringWithFormat:@"%@ ISO%d", roll.name, roll.iso];
     }
     if (self.currentPickings == 2) {
         RRRollManufacturer *manu = [_manufacturers objectAtIndex:(NSUInteger) _manufacturer];
@@ -261,11 +238,13 @@
                 break;
             case 1:
                 heading.text = @"Film";
-                value.text = self.getSelectedRollType.name;
+                value.text = [NSString stringWithFormat:@"%@ ISO%d",
+                                self.getSelectedRollType.name,
+                                self.getSelectedRollType.iso];
                 break;
             default:
                 heading.text = @"Format";
-                value.text = [NSString stringWithFormat:@"%d", self.getSelectedRollSize];
+                value.text = [NSString stringWithFormat:@"%@", self.getSelectedRollSize];
                 break;
         }
 

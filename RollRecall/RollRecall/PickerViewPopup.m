@@ -20,14 +20,17 @@
     if (self) {
         UIButton *button = [UIButton buttonWithType: UIButtonTypeRoundedRect];
         [button addTarget:self action:@selector(click) forControlEvents:UIControlEventTouchUpInside];
-        [button setTitle:@"Done" forState:UIControlStateNormal];
+        [button setTitle:@"OK" forState:UIControlStateNormal];
         _done = button;
 
         UIPickerView *picker = [[UIPickerView alloc] init];
+        picker.autoresizesSubviews = YES;
+        picker.showsSelectionIndicator = YES;
         _picker = picker;
 
         [self addSubview: _picker];
         [self addSubview: _done];
+        self.backgroundColor = [UIColor whiteColor];
     }
     return self;
 }
